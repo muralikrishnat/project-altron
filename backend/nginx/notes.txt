@@ -1,0 +1,4 @@
+docker build --no-cache -t reverseproxy .
+
+
+docker run -d  -p 5500:5500 --link=dotnet-api:dotnet-api --link=nodejs-api:nodejs-api --link=deno-api:deno-api --link=flask-api:flask-api --name reverse-proxy reverseproxy

@@ -1,0 +1,107 @@
+Angular
+=======
+node index.js --port=3434 --folder=frontend/ngElements/build
+
+ng serve --port 3434 --hmr false --liveReload=false
+ng serve --prod --output-hashing none  --build-optimizer false --watch
+
+
+ng serve --port 3434 --hmr false --liveReload=false
+
+
+docker build --no-cache -t ng_image .
+docker run -d --name ng-wc -p 3434:3434  ng_image:latest
+
+
+
+
+vue
+======
+vue build --target wc --dest build src/comps/inventory-items.vue
+vue build --target wc --dest build
+vue build --target wc --name inventory-items ./src/main.js
+node index.js --port=3435 --folder=frontend/vueElements/build
+
+docker build --no-cache -t vue_image .
+docker run -d --name vue-wc -p 3435:3435  vue_image:latest
+
+
+React
+======
+npx parcel --port=3436 src/index.html 
+npx parcel serve --no-source-maps --no-hmr --port 3436 src/index.html
+
+
+Base
+=======
+node index.js --port=5200 --folder=frontend/dynamic-strategy
+
+node index.js --port=5201 --folder=frontend/vanilajs-strategy
+
+node index.js --port=5202 --folder=frontend/iframe-strategy
+
+node index.js --port=5203 --folder=frontend/mounting-strategy
+
+docker build --no-cache -t wc_image .
+
+docker run -d --name wc-web -p 5201:5201  wc_image:latest
+
+
+
+docker build --no-cache -t wc_image .
+
+docker build --no-cache -t ng_image .
+
+
+
+Services
+=======
+
+Inventory API (Python - Flask)    : 5000
+---------------------------------
+project level python environment
+pipenv shell
+python app.py
+
+pipenv run pip freeze > requirements.txt
+
+docker build --no-cache -t flask_image .
+docker run -d --name flask-api --link=mongodb-app:mongodb-app -p 5000:5000  flask_image:latest
+docker start 26c361920754
+
+
+
+Cart API (Deno - Oak)             : 5001
+----------------------------------
+deno run --allow-all --unstable app.ts
+
+docker build --no-cache -t deno_image .
+docker run -d -v /Users/muralikrishnat/Murali/MC/TA/projects/project-altron/code/project-altron/backend/denoapi:/app --link=mongodb-app:mongodb-app -p 5001:5001 --name deno-api deno_image:latest
+
+
+
+PromoCodes API (DotNet Core)      : 5002
+----------------------------------
+dotnet run
+docker build --no-cache -t aspnetapp_image .
+docker run -d --link=mongodb-app:mongodb-app -p 5002:80 --name dotnet-api aspnetapp_image
+
+
+Authentication API (NodeJS)       : 5003
+-----------------------------------
+node services/auth.js
+docker build --no-cache -t nodeapi_image .
+docker run --name=nodejs-api -d --link=mongodb-app:mongodb-app -p 5003:5003  nodeapi_image:latest
+
+
+
+
+
+MongoDB:
+================================
+docker run -d --name mongodb-app -p 27018:27017 mongodb
+docker start aaaf6da41217
+
+
+
+docker run -it --name nginx-proxy nginx /bin/bash

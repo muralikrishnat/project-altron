@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>:: Mounting ::</title>
+  <link rel="stylesheet" href="/css/all.css">
+  <link rel="stylesheet" href="/css/vendor/tailwind.min.css">
+  <link rel="stylesheet" href="/css/dynamic-strategy.css">
+  <base href="/">
+</head>
+
+<body>
+  <div class="page-layout">
+    <div class="global-header bg-white h-12 shadow">
+      <div class="container mx-auto flex items-center h-full">
+        <div class="mx-6 flex justify-between items-center h-full w-full">
+          <div>Logo</div>
+          <div>Nav</div>
+          <div class="flex">
+            <div class="relative mr-2">
+              <i class="fas fa-shopping-cart text-2xl mr-3 cursor-pointer" onclick="toggleElem('CART')"></i>
+
+              <div class="absolute rounded cart-dropdown flex flex-col hidden" data-toggle-target="CART">
+                
+                <div class="bg-blue-600 text-white font-bold text-right rounded-t px-4 py-2 flex justify-between flex-initial h-10">
+                  <span class="flex items-center">
+                    <i class="far fa-times-circle text-xl cursor-pointer" onclick="toggleElem('CART')"></i>
+                  </span>
+                  <span>Cart</span>
+                </div>
+                <div class="react-app flex-1"></div>
+              </div>
+
+            </div>
+            <div class="relative">
+              <i class="far fa-user-circle text-2xl mr-3 cursor-pointer " onclick="toggleElem('PROFILE_DROPDOWN')"></i>
+              <div class="absolute rounded profile-dropdown hidden" data-toggle-target="PROFILE_DROPDOWN">
+                <div>Profile</div>
+                <div>Logout</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="container mx-auto">
+        <div id=app></div>
+      </div>
+    </div>
+    <div class="global-footer"></div>
+  </div>
+
+  <div class="app-modal flex justify-center items-center hidden" data-toggle-target="MODAL">
+    <div class="app-modal__bg" onclick="toggleElem('MODAL')"></div>
+    <div class="app-modal__content rounded shadow overflow-hidden">
+      <div class="p-4 bg-blue-600 text-white font-bold flex justify-between">
+        <span>Item Details</span>
+        <span>
+          <i class="far fa-times-circle text-xl cursor-pointer" onclick="toggleElem('MODAL')"></i>
+        </span>
+      </div>
+      <app-root></app-root>
+    </div>
+  </div>
+
+
+  <script src="/js/api.service.js"></script>
+  <script src="/js/pubsub.service.js"></script>
+  <script src="/js/store.service.js"></script>
+
+  <script src="/js/mounting-strategy.js"></script>
+
+  <!-- <script type=module src=http://localhost:4343/js/chunk-vendors.6adf377c.js></script>
+  <script type=module src=http://localhost:4343/js/app.9507cde8.js></script> -->
+
+  <!-- <script src="http://localhost:4200/runtime.js" type="module"></script>
+  <script src="http://localhost:4200/polyfills.js" type="module"></script>
+  <script src="http://localhost:4200/styles.js" type="module"></script>
+  <script src="http://localhost:4200/vendor.js" type="module"></script>
+  <script src="http://localhost:4200/main.js" type="module"></script> -->
+  
+  <script type="text/javascript" src="http://localhost:4343/js/chunk-vendors.6adf377c.js"></script>
+  <script type="text/javascript" src="http://localhost:4343/js/app.9507cde8.js"></script>
+
+  
+  <script src="http://localhost:4344/runtime-es2015.js" type="module"></script>
+  <script src="http://localhost:4344/polyfills-es2015.js" type="module"></script>
+  <script src="http://localhost:4344/styles-es2015.js" type="module"></script>
+  <script src="http://localhost:4344/vendor-es2015.js" type="module"></script>
+  <script src="http://localhost:4344/main-es2015.js" type="module"></script>
+
+  <script src="http://localhost:4345/main.c8f2686c.js"></script>
+</body>
+
+</html>

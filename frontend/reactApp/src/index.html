@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>:: Cart ::</title>
+    <link rel="stylesheet" href="http://localhost:5202/css/all.css">
+    <link rel="stylesheet" href="http://localhost:5202/css/vendor/tailwind.min.css">
+    <link rel="stylesheet" href="http://localhost:5202/css/dynamic-strategy.css">
+</head>
+<body class="h-full">
+    <div class="react-app h-full"></div>
+    <script>
+        window.addEventListener('message', onMessage);
+        window.messageChannel = null;        
+        function onMessage(e) {
+            if (e.ports && e.ports.length > 0) {
+                window.messageChannel = e.ports[0];
+            }
+        }
+    </script>
+    <script src="/main.js"></script>
+</body>
+</html>

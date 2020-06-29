@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="/css/all.css">
+  <link rel="stylesheet" href="/css/vendor/tailwind.min.css">
+  <link rel="stylesheet" href="/css/dynamic-strategy.css">
+
+</head>
+
+<body>
+  <div class="page-layout">
+    <div class="global-header bg-white h-12 shadow">
+      <div class="container mx-auto flex items-center h-full">
+        <div class="mx-6 flex justify-between items-center h-full w-full">
+          <div>Logo</div>
+          <div>Nav</div>
+          <div class="flex">
+            <div class="relative">
+              <i class="far fa-user-circle text-2xl mr-3 cursor-pointer " onclick="dynamicStrategy.toggleElem('PROFILE_DROPDOWN')"></i>
+              <div class="absolute rounded profile-dropdown hidden" data-toggle-target="PROFILE_DROPDOWN">
+                <div>Profile</div>
+                <div>Logout</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="container mx-auto">
+        <div class="promo-code-container grid-container mt-4">
+
+        </div>
+      </div>
+      <div class="global-footer"></div>
+    </div>
+    <script src="/js/constants.js"></script>
+    <script src="/js/api.service.js"></script>
+    <script>
+      window.onload = function() {
+        api.get({
+          url: 'http://localhost:5002/api/promo-codes'
+        }).then(resp => {
+          if (resp && resp instanceof Array) {
+            resp.forEach(item => {
+              let promoElem = document.createElement('DIV');
+              promoElem.className = "bg-white rounded p-4 shadow";
+              promoElem.innerHTML = `
+                    <div class="flex justify-between">
+                        <span class="uppercase">Promo Code</span>
+                        <span class="">${item.promoString}</span>
+                    </div>
+                    <div class="flex justify-between mt-2">
+                        <span>${item.promoAmount}</span>
+                        <span class="">${item.promoValidTill}</span>
+                    </div>
+                `;
+              document.querySelector('.promo-code-container').appendChild(promoElem);
+            });
+          }
+        });
+      };
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <link rel="stylesheet" href="/css/all.css">
+  <link rel="stylesheet" href="/css/vendor/tailwind.min.css">
+  <link rel="stylesheet" href="/css/dynamic-strategy.css">
+  <style>
+    .form-field .error-message {
+      display: none;
+      color: red;
+    }
+    
+    .form-field.required .required,
+    .form-field.alpha .alpha,
+    .form-field.alphanumeric .alphanumeric,
+    .form-field.regex .regex,
+    .form-field.minlength .minlength,
+    .form-field.maxlength .maxlength,
+    .form-field.email .email {
+      display: inline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-layout">
+    <div class="global-header bg-white h-12 shadow">
+      <div class="container mx-auto flex items-center h-full">
+        <div class="mx-6 flex justify-between items-center h-full w-full">
+          <div>Logo</div>
+          <div>Nav</div>
+          <div class="flex">
+            <div class="relative">
+              <i class="far fa-user-circle text-2xl mr-3 cursor-pointer " onclick="dynamicStrategy.toggleElem('PROFILE_DROPDOWN')"></i>
+              <div class="absolute rounded profile-dropdown hidden" data-toggle-target="PROFILE_DROPDOWN">
+                <div>Profile</div>
+                <div>Logout</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="container mx-auto">
+        <form autocomplete="off" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-6 login-form">
+          <div class="text-xs text-red-500 mb-2 hidden login-error">
+            Username and password are invalid
+          </div>
+          <div class="mb-4 form-field">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+              Username
+            </label>
+            <input data-validate-required="true" data-validate-reactive="true"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" name="username" type="text" placeholder="Username">
+            <span class="error-message required text-xs">This field is required</span>
+          </div>
+          <div class="mb-6 form-field">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+              Password
+            </label>
+            <input data-validate-required="true" data-validate-reactive="true"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" name="password" type="password" placeholder="******************">
+            <span class="error-message required text-xs">This field is required</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <button onclick="submitForm('.login-form')" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+              Sign In
+            </button>
+          </div>
+          <div class="flex login-token flex-wrap"></div>
+        </form>
+      </div>
+    </div>
+    <div class="global-footer"></div>
+  </div>
+
+  <script src="/js/vendor/lighdator.js"></script>
+  <script src="/js/constants.js"></script>
+  <script src="/js/api.service.js"></script>
+  <script>
+    window.onload = function() {
+      lighdator.bindValidation();
+    };
+    
+    var submitForm = function(elemSelector) {
+      var validationResult = lighdator.validateForm(document.querySelector(elemSelector));
+      if (validationResult.valid) {
+        document.querySelector('.login-error').classList.add('hidden');
+        document.querySelector('.login-token').innerHTML = '';
+        api.post({
+          url: 'http://localhost:5003/api/authenticate',
+          data: {
+            username: document.querySelector('[name="username"]').value,
+            password: document.querySelector('[name="password"]').value
+          }
+        }).then(resp => {
+          console.log("resp", resp);
+          if (resp.token) {
+            document.querySelector('.login-error').classList.add('hidden');
+            document.querySelector('.login-token').innerHTML = `
+              <span class="font-bold mt-2">Auth Token :</span>
+              <span class="break-all mt-2 text-gray-500">${resp.token}</span>
+            `;
+          } else {
+            document.querySelector('.login-error').classList.remove('hidden');
+          }
+        });
+      }
+    };
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>:: Iframe ::</title>
+  <link rel="stylesheet" href="/css/all.css">
+  <link rel="stylesheet" href="/css/vendor/tailwind.min.css">
+  <link rel="stylesheet" href="/css/dynamic-strategy.css">
+
+</head>
+
+<body>
+  <div class="page-layout">
+    <div class="global-header bg-white h-12 shadow">
+      <div class="container mx-auto flex items-center h-full">
+        <div class="mx-6 flex justify-between items-center h-full w-full">
+          <div>Logo</div>
+          <div>Nav</div>
+          <div class="flex">
+            <div class="relative mr-2">
+              <i class="fas fa-shopping-cart text-2xl mr-3 cursor-pointer" onclick="handleClickCart('CART'); setHeightIframe('.cart-item-section');"></i>
+              <div class="absolute rounded cart-dropdown flex flex-col hidden" data-toggle-target="CART">
+                <div class="bg-blue-600 text-white font-bold text-right rounded-t px-4 py-2 flex justify-between flex-initial h-10">
+                    <span class="flex items-center">
+                        <i class="far fa-times-circle text-xl cursor-pointer" onclick="handleClickCart('CART')"></i>
+                    </span>
+                  <span>Cart</span>
+                </div>
+                <!-- <items-cart></items-cart> -->
+                <div class="cart-item-section flex-auto">
+                    <iframe style="width: 100%;" onload="bindCartIframeChannel(event)" src="http://localhost:5345/" ></iframe>
+                </div>
+              </div>
+
+            </div>
+            <div class="relative">
+              <i class="far fa-user-circle text-2xl mr-3 cursor-pointer " onclick="toggleElem('PROFILE_DROPDOWN')"></i>
+              <div class="absolute rounded profile-dropdown hidden" data-toggle-target="PROFILE_DROPDOWN">
+                <div>Profile</div>
+                <div>Logout</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-content">
+      <div class="container mx-auto mt-2">
+        <!-- <inventory-items id="inventoryitems"></inventory-items> -->
+        <iframe style="width: 100%;"  onload="iframeLoaded(event)" src="http://localhost:5343/" ></iframe>
+      </div>
+    </div>
+    <div class="global-footer"></div>
+  </div>
+
+  <div class="app-modal flex justify-center items-center hidden" data-toggle-target="MODAL">
+    <div class="app-modal__bg" onclick="toggleElem('MODAL')"></div>
+    <div class="app-modal__content rounded shadow overflow-hidden flex flex-col">
+      <div class="p-4 bg-blue-600 text-white font-bold flex justify-between">
+        <span>Item Details</span>
+        <span>
+            <i class="far fa-times-circle text-xl cursor-pointer" onclick="toggleElem('MODAL')"></i>
+        </span>
+      </div>
+      <div class="bg-gray-400 flex-auto item-detail-section" >
+        <iframe style="width: 100%;height: 100%" src="http://localhost:5344/?code=MITV"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.service.js"></script>
+  <script src="/js/pubsub.service.js"></script>
+  <script src="/js/store.service.js"></script>
+
+  <script src="/js/iframe-strategy.js"></script>
+  
+</body>
+
+</html>

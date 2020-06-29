@@ -1,0 +1,21 @@
+{
+  "name": "vueelements",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "vue build --target wc --dest build src/comps/inventory-items.vue",
+    "watch": "env NODE_ENV=dev vue build --target wc --dest build src/comps/inventory-items.vue",
+    "serve": "node index.js --port=3435 --folder=build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vue/web-component-wrapper": "^1.2.0",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli": "^4.4.1"
+  }
+}
