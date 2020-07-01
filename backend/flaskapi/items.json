@@ -1,0 +1,38 @@
+[
+    {
+        "code": "OP8",
+        "name": "OnePlus 8",
+        "availableCount": 10,
+        "currencyFormat": "$",
+        "itemType": "Mobile",
+        "discountAmount": 2,
+        "images": [
+            "/images/oneplus8.jpg",
+            "/images/oneplus8-2.jpg",
+            "/images/oneplus8-3.jpg"
+        ],
+        "availableCoupons": [
+            "abc",
+            "abc2"
+        ],
+        "stockPrice": 100
+    },
+    {
+        "code": "MITV",
+        "name": "MI TV",
+        "availableCount": 10,
+        "currencyFormat": "$",
+        "itemType": "Television",
+        "discountAmount": 10,
+        "images": [
+            "/images/oneplus8.jpg",
+            "/images/oneplus8-2.jpg",
+            "/images/oneplus8-3.jpg"
+        ],
+        "availableCoupons": [
+            "abc",
+            "abc2"
+        ],
+        "stockPrice": 1000
+    }
+]
