@@ -4,12 +4,12 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 
-app.config['MONGODB_SETTINGS'] = {
-    'host': 'mongodb://mongodb-app:27017/project-altron'
-}
 # app.config['MONGODB_SETTINGS'] = {
-#     'host': 'mongodb://localhost:27017/project-altron'
+#     'host': 'mongodb://mongodb-app:27017/project-altron'
 # }
+app.config['MONGODB_SETTINGS'] = {
+    'host': 'mongodb://localhost:27017/project-altron'
+}
 
 db.initialize_db(app)
 CORS(app)

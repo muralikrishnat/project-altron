@@ -10,7 +10,7 @@ const jwtExpirySeconds = 1000 * 60;
 
 const {sendResponse} = require('./utils');
 const CONSTANTS = require('./configs');
-const MONGO_URL = 'mongodb://mongodb-app:27017';
+const MONGO_URL = 'mongodb://localhost:27017';
 const DB_NAME = CONSTANTS.DB.DB_NAME || 'project-altron';
 
 let db;
