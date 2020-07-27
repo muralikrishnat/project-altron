@@ -1,6 +1,6 @@
-FROM aredwood/deno
+FROM hayd/alpine-deno
 
-ADD . /app
+COPY . /app
 
 WORKDIR /app
 

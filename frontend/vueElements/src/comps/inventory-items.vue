@@ -39,7 +39,6 @@ export default {
     },
     watch: {
         items: function() {
-            console.log("items updates", this.items);
             try {
                 this.inventoryItems = JSON.parse(this.items);
                 this.render();

@@ -25,14 +25,12 @@ function onMessage(iframeMessage) {
                     toggleElem('MODAL');
                     iframeDetailSection.onload = () => {
                         let elemStyle = getComputedStyle(itemDetailSection, null);
-                        console.log("width and height", elemStyle.width, elemStyle.height);
                         iframeDetailSection.style.width = elemStyle.width;
                         iframeDetailSection.style.height = elemStyle.height;
                     };
                 }
             }
             if (itemData.actionType === 'ADD_TO_CART') {
-                console.log("add to cart", itemData.data);
                 document.querySelector('.cart-item-section').querySelector('iframe').contentWindow.postMessage(iframeMessage.data, '*');
             }
         }
